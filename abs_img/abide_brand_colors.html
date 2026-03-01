@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abide Brand Palette: Deep Olive</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+        }
+
+        h1 {
+            font-weight: 300;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 18px;
+            color: #2C2E2F;
+        }
+
+        /* The Main Header Rectangle */
+        .header-rect {
+            width: 800px;
+            height: 200px;
+            background-color: #3B4B35; /* Deep Olive */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            color: #F0EAD6;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .header-info {
+            text-align: center;
+        }
+        
+        .header-info span {
+            display: block;
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 5px;
+            font-family: monospace;
+        }
+
+        /* The Grid for the 4 Squares */
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 800px;
+        }
+
+        .swatch-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .square {
+            width: 100%;
+            height: 150px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .hex {
+            font-family: monospace;
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        /* Color Definitions */
+        .bg-vellum { background-color: #F0EAD6; border: 1px solid #e0e0e0; }
+        .bg-clay { background-color: #C27B58; }
+        .bg-gold { background-color: #BFA36F; }
+        .bg-charcoal { background-color: #2C2E2F; }
+
+    </style>
+</head>
+<body>
+
+    <h1>Abide Brand Palette</h1>
+
+    <div class="header-rect">
+        <div class="header-info">
+            <strong>DEEP OLIVE</strong>
+            <span>#3B4B35</span>
+        </div>
+    </div>
+
+    <div class="palette-grid">
+        
+        <div class="swatch-card">
+            <div class="square bg-vellum"></div>
+            <div class="label">Vellum</div>
+            <div class="hex">#F0EAD6</div>
+        </div>
+
+        <div class="swatch-card">
+            <div class="square bg-clay"></div>
+            <div class="label">Baked Clay</div>
+            <div class="hex">#C27B58</div>
+        </div>
+
+        <div class="swatch-card">
+            <div class="square bg-gold"></div>
+            <div class="label">Antique Gold</div>
+            <div class="hex">#BFA36F</div>
+        </div>
+
+        <div class="swatch-card">
+            <div class="square bg-charcoal"></div>
+            <div class="label">Charcoal</div>
+            <div class="hex">#2C2E2F</div>
+        </div>
+
+    </div>
+
+</body>
+</html>

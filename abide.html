@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abide: Moving Beyond the Omission</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root {
+            --olive: #3B4B35;
+            --vellum: #F0EAD6;
+            --gold: #BFA36F;
+            --charcoal: #2C2E2F;
+            --clay: #C27B58;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--charcoal);
+            color: var(--vellum);
+            font-family: 'Avenir Next', 'Helvetica Neue', Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 40px;
+            position: relative;
+            text-align: center;
+        }
+
+        .vellum-bg {
+            background-color: var(--vellum);
+            color: var(--charcoal);
+        }
+
+        .olive-bg {
+            background-color: var(--olive);
+            color: var(--vellum);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 300;
+            letter-spacing: -1px;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.4rem;
+            max-width: 900px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .infographic {
+            max-width: 90%;
+            max-height: 65vh;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        /* Slide 2: Data Visuals */
+        .chart-container {
+            width: 600px;
+            height: 300px;
+            display: flex;
+            align-items: flex-end;
+            gap: 60px;
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .bar {
+            width: 180px;
+            background: var(--olive);
+            position: relative;
+            transition: height 1.5s ease-out;
+            height: 0;
+        }
+
+        .bar::before {
+            content: attr(data-label);
+            position: absolute;
+            top: -40px;
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .wall {
+            height: 100%;
+            width: 8px;
+            background: var(--clay);
+            position: absolute;
+            left: 65%;
+            transform: scaleY(0);
+            transform-origin: bottom;
+        }
+
+        /* Slide 5: Socratic AI UI with Fixed Scrolling */
+        .phone-frame { 
+            width: 350px; height: 600px; background: #1a1a1a; border-radius: 45px; 
+            border: 10px solid #333; padding: 25px 0; /* Vertical padding handled by children */
+            display: flex; flex-direction: column; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5); 
+            overflow: hidden; /* Prevents the whole phone from moving */
+            text-align: left;
+        }
+
+        /* The fixed header */
+        .chat-header { 
+            font-size: 0.8rem; text-transform: uppercase; color: var(--gold); 
+            border-bottom: 1px solid #444; padding: 0 25px 15px 25px; 
+            background: #1a1a1a; z-index: 10;
+        }
+
+        /* The new scrollable area for messages */
+        .chat-body {
+            flex-grow: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            padding: 20px 25px 60px 25px;
+            scroll-behavior: smooth;
+        }
+
+        /* Hide scrollbar */
+        .chat-body::-webkit-scrollbar { display: none; }
+        .chat-body { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .chat-header {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 10px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 5px;
+        }
+
+        .msg {
+            padding: 12px 16px;
+            border-radius: 18px;
+            font-size: 0.95rem;
+            max-width: 85%;
+            opacity: 0;
+            line-height: 1.4;
+        }
+
+        .ai {
+            align-self: flex-start;
+            background: #2c2c2c;
+            color: var(--vellum);
+            border-bottom-left-radius: 4px;
+        }
+
+        .user {
+            align-self: flex-end;
+            background: var(--gold);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .btn {
+            padding: 18px 50px;
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            cursor: pointer;
+            transition: 0.4s;
+            margin-top: 40px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        .btn:hover {
+            background: var(--gold);
+            color: var(--olive);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <section id="slide1">
+        <h1>Teaching them to <span style="color:var(--gold); font-weight:700;">OBSERVE</span></h1>
+        <p>The American Bible Society has mastered Bible <em>Access</em>. <br>Abide is about mastering Bible
+            <em>Appropriation</em>.</p>
+        <img src="abs_img/0A_Biblical_Mandate.png" alt="Biblical Mandate" class="infographic">
+    </section>
+
+    <section class="vellum-bg" id="slide2">
+        <h2>The Engagement Crisis</h2>
+        <p>82% of the "Movable Middle" are curious about the Bible. <br>But curiosity hits a wall when it meets a lack
+            of skill.</p>
+        <div class="chart-container">
+            <div class="bar" data-label="82% Curiosity" id="bar1"></div>
+            <div class="bar" style="background: var(--clay);" data-label="18% Engaged" id="bar2"></div>
+            <div class="wall" id="theWall"></div>
+        </div>
+    </section>
+
+    <section class="olive-bg" id="slide3">
+        <h2 style="color: var(--vellum);">From Text to Transformation</h2>
+        <p>We solve the relevance barrier by building a sturdier bridge<br>
+            from the "Ancient Yesterday" to "Modern Today."</p>
+        <img src="abs_img/L10_Application.png" alt="The 4-Step Bridge" class="infographic">
+    </section>
+
+    <section id="slide4">
+        <h2>A Scalable Discipleship Roadmap</h2>
+        <p>A multi-modal ecosystem designed to graduate individuals from digital training into local small group
+            "laboratories."</p>
+        <img src="abs_img/L2_Inductive_Mindset_and_IBS.png" alt="Inductive Process" class="infographic">
+    </section>
+
+    <section class="vellum-bg" id="slide5">
+        <h2>Interactive Coaching, Not Content</h2>
+        <p>The Abide AI doesn't give answers; it asks the right questions to lead the user to discovery.</p>
+        <div class="phone-frame">
+            <div class="chat-header">Abide Socratic Tutor</div>
+            <div class="chat-body" id="phoneBody">
+                <div class="msg user" id="m1">I am studying John 15 and I could use some help understanding this passage.
+                </div>
+                <div class="msg ai" id="m2">Let's start by seeing what's there. Look at verse 1. Who is speaking, and who is
+                    He speaking to?</div>
+                <div class="msg user" id="m3">Jesus is speaking to His disciples.</div>
+                <div class="msg ai" id="m4">Correct. Now look at the central metaphor. What are the three parts?</div>
+                <div class="msg user" id="m5">The vine, the vine-grower, and the branches.</div>
+                <div class="msg ai" id="m6">Finally, what verb is repeated throughout this passage the most?</div>
+                <div class="msg user" id="m7">Abide! It's repeated 10 times!</div>
+                <div class="msg ai" id="m8">Exactly. Remember, repetition signals importance. What does that tell you about
+                    Jesus's priority here?</div>
+                <div class="msg user" id="m9">Jesus wants me to Abide in Him!</div>
+                <div class="msg ai" id="m10">The Greek word for "Abide" used throughout the New Testament—and specifically in John 15—is μένω (menō).<br>
+                    Would you like to know more about this significant word to understand the passage better?
+                </div>
+                <div class="msg user" id="m11">Yes please!</div>
+                <div class="msg ai" id="m12">
+                    The word carries a deep, multi-layered meaning that goes beyond simply "staying":<br><br>
+                    <strong>To Remain:</strong> It describes staying in a relationship over time. The opposite of departing.<br><br>
+                    <strong>To Dwell:</strong> It implies taking up permanent residence. We don't visit God; we live in constant
+                    fellowship.<br><br>
+                    <strong>To Endure:</strong> A connection that survives pressure and time.<br><br>
+                    Just as a branch is physically "held" by the vine, a disciple remains in total, continuous dependence on Christ.<br><br>
+                    How does this deeper understanding of "Abide" shape your view of the metaphors of the vine, the vine-grower, and the branches?<br><br>
+                    How does it shape your view of what it means to be a disciple of Jesus?
+                </div>
+                <div class="msg user" id="m13">It helps me understand that being a disciple is not just about following rules,
+                        but about maintaining a continuous, intimate relationship with Jesus. He is my source of life and nourishment.
+                        Through His abiding presence, I can endure challenges and grow in my faith. It also emphasizes the importance of 
+                        staying connected to Him daily, not just in times of need.
+                </div>
+                <div class="msg ai" id="m14">What is one thing you can do this week to cultivate a deeper sense of abiding in Christ based on what we've discussed?</div>
+                <div class="msg user" id="m15">
+                    I can set aside dedicated time each day to read the Bible and pray, intentionally seeking to deepen my relationship with Jesus. 
+                    I can also reflect on the meaning of "Abide" and how it applies to my daily life, asking God to help me remain connected to Him in all circumstances.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="olive-bg" id="slide6">
+        <h2 style="color: var(--vellum);">Beyond the Checkbox</h2>
+        <p>Let's redefine Bible Engagement from <em>Frequency</em> to <em>Fruit</em>.</p>
+        <img src="abs_img/measuring_bible_engagement.png" alt="Measuring Engagement" class="infographic">
+        <a href="https://www.linkedin.com/in/jeffreytbenson/" class="btn">Start the Pilot</a>
+    </section>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Force the phone to the top on page load
+        window.onload = function () {
+            const frame = document.getElementById('phoneBody');
+            if (frame) frame.scrollTop = 0;
+        };
+
+        // 2. Infographic animations
+        gsap.utils.toArray(".infographic").forEach(img => {
+            gsap.to(img, {
+                scrollTrigger: img,
+                opacity: 1,
+                y: 0,
+                duration: 1.2,
+                ease: "power2.out"
+            });
+        });
+
+        // 3. Data Bar animations
+        gsap.to("#bar1", { scrollTrigger: "#slide2", height: "82%", duration: 1.5, ease: "back.out(1.7)" });
+        gsap.to("#bar2", { scrollTrigger: "#slide2", height: "18%", duration: 1.5, delay: 0.5, ease: "back.out(1.7)" });
+        gsap.to("#theWall", { scrollTrigger: "#slide2", scaleY: 1, duration: 1, delay: 1.2 });
+
+        // 5. Updated Socratic AI Timeline - Manual Scroll Version
+        let tl = gsap.timeline({ scrollTrigger: "#slide5" });
+
+        tl.to("#m1", { opacity: 1, y: 0, duration: 0.4, delay: 0.5 })
+                .to("#m2", { opacity: 1, y: 0, duration: 0.4, delay: 1.2 })
+                .to("#m3", { opacity: 1, y: 0, duration: 0.4, delay: 1.0 })
+                .to("#m4", { opacity: 1, y: 0, duration: 0.4, delay: 1.5 })
+                .to("#m5", { opacity: 1, y: 0, duration: 0.4, delay: 1.5 })
+                .to("#m6", { opacity: 1, y: 0, duration: 0.4, delay: 1.0 })
+                .to("#m7", { opacity: 1, y: 0, duration: 0.4, delay: 1.2 })
+                .to("#m8", { opacity: 1, y: 0, duration: 0.4, delay: 1.5 })
+                .to("#m9", { opacity: 1, y: 0, duration: 0.4, delay: 1.0 })
+                .to("#m10", { opacity: 1, y: 0, duration: 0.4, delay: 2.0 })
+                .to("#m11", { opacity: 1, y: 0, duration: 0.4, delay: 1.2 })
+                .to("#m12", { opacity: 1, y: 0, duration: 0.4, delay: 2.0 })
+                .to("#m13", { opacity: 1, y: 0, duration: 0.4, delay: 1.8 })
+                .to("#m14", { opacity: 1, y: 0, duration: 0.4, delay: 1.5 })
+                .to("#m15", { opacity: 1, y: 0, duration: 0.4, delay: 1.8 });
+    </script>
+</body>
+
+</html>
