@@ -224,6 +224,24 @@
             color: var(--olive);
             transform: scale(1.05);
         }
+
+        #imageModal {
+            /* Increased to 0.7s for a deliberate, cinematic feel */
+            animation: fadeIn 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                backdrop-filter: blur(0px);
+                /* Optional: adds a nice focus shift */
+            }
+
+            to {
+                opacity: 1;
+                backdrop-filter: blur(5px);
+            }
+        }
     </style>
 </head>
 
@@ -266,14 +284,21 @@
 
     <section id="slide4">
         <h2>A Scalable Discipleship Roadmap</h2>
-        <p>A multi-modal ecosystem designed to graduate individuals from digital training into local small group
-            "laboratories."</p>
-        <img src="abs_img/L2_Inductive_Mindset_and_IBS.png" alt="Inductive Process" class="infographic">
+        <p>A multi-modal ecosystem designed to train individuals in the manner<br>
+            that best meets their needs, while encouraging hands on<br>
+            practice and mentorship in small group "laboratories."</p>
+        <img src="abs_img/multi_modal_training_vision.png" alt="Inductive Process" class="infographic">
     </section>
 
     <section class="vellum-bg" id="slide5">
-        <h2>Interactive Coaching, Not Content</h2>
-        <p>The Abide AI doesn't give answers; it asks the right questions to lead the user to discovery.</p>
+        <h2>The Horizon: An AI Socratic Coach</h2>
+        <p>A future-state application focused on <em>interactive coaching, not just content</em>.</p>
+        <ul style="text-align: left; max-width: 600px; margin: 0 auto 20px auto; line-height: 1.6;">
+            <li><strong>High-Fidelity Training:</strong> Built exclusively on the 2,000+ asset Abide library.</li>
+            <li><strong>Integrated Hub:</strong> Seamlessly access micro-lessons, Scripture, and study plans.</li>
+            <li><strong>Active Apprenticeship:</strong> Real-time, Q&A dialogue to sharpen
+                observation, interpretation, and application skills.</li>
+        </ul>
         <div class="phone-frame">
             <div class="chat-header">Abide Socratic Tutor</div>
             <div class="chat-body" id="phoneBody">
@@ -335,7 +360,15 @@
         <h2 style="color: var(--vellum);">Beyond the Checkbox</h2>
         <p>Let's redefine Bible Engagement from <em>Frequency</em> to <em>Fruit</em>.</p>
         <img src="abs_img/measuring_bible_engagement.png" alt="Measuring Engagement" class="infographic">
-        <a href="https://www.linkedin.com/in/jeffreytbenson/" class="btn">Start the Pilot</a>
+
+        <a href="https://www.linkedin.com/company/abide-discipleship-ministries" target="_blank" class="btn">
+            Explore a Beta Partnership</a>
+
+        <br><br>
+        <a href="https://docs.google.com/document/d/1GlUHi7jy6-kyF7id3dHD0Xt9s4zxO9MUprh8SXt_XHs/edit?usp=sharing"
+            target="_blank" rel="noopener noreferrer"
+            style="color: var(--vellum); text-decoration: underline; font-size: 0.9em; opacity: 0.8;">
+            View the Alpha Abide Curriculum Index (Links to 1,300+ Assets)</a>
     </section>
 
     <script>
@@ -395,6 +428,19 @@
             image.addEventListener('touchend', openModal);
         });
     </script>
+
+    <div id="imageModal"
+        style="display:none; position:fixed; z-index:1000; padding-top:50px; left:0; top:0; width:100%; height:100%; overflow:auto; background-color: rgba(0,0,0,0.9); cursor:zoom-out;"
+        onclick="this.style.display='none'">
+        <span
+            style="position:absolute; top:15px; right:35px; color:#f1f1f1; font-size:40px; font-weight:bold; cursor:pointer;">&times;</span>
+        <img id="imgFull"
+            style="margin:auto; display:block; max-width:90%; max-height:85vh; border: 2px solid var(--gold); border-radius: 8px; box-shadow: 0 0 20px rgba(0,0,0,0.5);">
+        <p style="text-align:center; color:var(--vellum); margin-top:15px; font-family:sans-serif;">Click anywhere to
+            close
+        </p>
+    </div>
+
 </body>
 
 </html>
