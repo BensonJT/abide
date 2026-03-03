@@ -230,6 +230,32 @@
             animation: fadeIn 0.7s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
+
+        .testimonial {
+            margin-top: 40px;
+            padding: 25px;
+            border-left: 4px solid var(--gold);
+            background: rgba(191, 163, 111, 0.05);
+            font-style: italic;
+            text-align: left;
+        }
+
+        .testimonial-body {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: inherit;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-attribution {
+            font-style: normal;
+            font-weight: bold;
+            color: var(--gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.9rem;
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -248,10 +274,34 @@
 <body>
 
     <section id="slide1">
-        <h1>Teaching them to <span style="color:var(--gold); font-weight:700;">OBSERVE</span></h1>
+        <h1>Teach them to <span style="color:var(--gold); font-weight:700;">OBEY / DO</span></h1>
         <p>The American Bible Society has mastered Bible <em>Access</em>. <br>Abide is about mastering Bible
             <em>Appropriation</em>.
         </p>
+        <div class="testimonial-grid"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 10px;">
+            <div class="testimonial" style="background: rgba(255,255,255,0.05); border-left: 3px solid var(--gold);">
+                <p class="testimonial-body-light" style="font-size: 0.95rem;">
+                    Jesus drew near and said to them, “I have been given all authority in heaven and on earth. Go, then,
+                    to all peoples
+                    everywhere and make them my disciples: baptize them in the name of the Father, the Son, and the Holy
+                    Spirit, and
+                    <strong>teach them to obey</strong> everything I have commanded you. And I will be with you always,
+                    to the end of the age."
+                </p>
+                <cite class="testimonial-attribution">— Matthew 28:18-20 (GNT)</cite>
+            </div>
+            <div class="testimonial" style="background: rgba(255,255,255,0.05); border-left: 3px solid var(--gold);">
+                <p class="testimonial-body-light" style="font-size: 0.95rem;">
+                    Jesus came to them and said: I have been given all authority in heaven and on earth! Go to the
+                    people of all nations and
+                    make them my disciples. Baptize them in the name of the Father, the Son, and the Holy Spirit, and
+                    <strong>teach them to do</strong>
+                    everything I have told you. I will be with you always, even until the end of the world."
+                </p>
+                <cite class="testimonial-attribution">— Matthew 28:18-20 (CEV)</cite>
+            </div>
+        </div>
         <img src="abs_img/0A_Biblical_Mandate.png" alt="Biblical Mandate" class="infographic">
     </section>
 
